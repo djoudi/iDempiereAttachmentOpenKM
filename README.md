@@ -1,13 +1,12 @@
 # README #
 
-### What is this repository for? ###
+OpenKM Plugin :
 
-* It provides an iDempiere AttachmentProvider to store Attachments in OpenKM DMS
-* Version 3.1.0 (developed against iDempiere 7.1)
-* Needs Alfresco 5.0 or later (developed against 5.0.d)
-* Based on work done by Kittiu as described on 
-  http://www.adempiere.com/index.php?title=ADempiere_Integration_With_Alfresco
+Follow below steps to setup OpenKM Plugin :
 
-### How do I get set up? ###
-
-See wiki page http://wiki.idempiere.org/en/Plugin:_Alfresco_AttachmentProvider
+- Install OpenKM ()
+- Check whether its accessible on localhost:8082/OpenKM
+- Import DMS plugin project in Eclipse
+- Select DMS plugin in server.product
+- Import Storage Provider 2Pack in client
+- restart the server
