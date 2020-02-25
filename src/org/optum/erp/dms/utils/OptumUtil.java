@@ -27,11 +27,13 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+//Main Entry point for OpenKM API calling
 public class OptumUtil {
 	public boolean loadData() {
 		return false;
 	} 
 	
+	// Using this method data will be save to OpenKM
 	public String saveDataToOpenKM(byte[] data, String fileName, String url, String path, String encoding)
 			throws IOException {
 		
@@ -151,6 +153,7 @@ public class OptumUtil {
 		return uuid.getBytes();
 	}
 
+	//Getting OpenKM configuration from iDempiere
 	public static DMSConfig getDMSConfig(MStorageProvider prov, int tableId, int recordId) {
 		DMSConfig config = new DMSConfig();
 		String auth = prov.getUserName() + ":" + prov.getPassword();

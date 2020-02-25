@@ -17,11 +17,13 @@ import org.compiere.util.CLogger;
 import org.optum.erp.dms.utils.DMSConfig;
 import org.optum.erp.dms.utils.OptumUtil;
 
+//Main class for handling all events for attachment
 public class AttachmentOpenKM implements IAttachmentStore {
 
 	private final CLogger log = CLogger.getCLogger(getClass());
 	public static final String ZIP = "zip";
 
+	//This method will called for load data from OpenKM in Attachment window
 	@Override
 	public boolean loadLOBData(MAttachment attach, MStorageProvider prov) {
 
@@ -59,6 +61,7 @@ public class AttachmentOpenKM implements IAttachmentStore {
 				if (log.isLoggable(Level.FINE))
 					log.fine(name + " - size=" + dataEntry.length + " - zip=" + entry.getCompressedSize() + "("
 							+ entry.getSize() + ") " + (entry.getCompressedSize() * 100 / entry.getSize()) + "%");
+				//Getting OpenKM configuration
 				DMSConfig config = OptumUtil.getDMSConfig(prov, attach.getAD_Table_ID(), attach.getRecord_ID());
 				dataEntry = OptumUtil.getDocument(new String(dataEntry), config);
 				attach.m_items.add(new MAttachmentEntry(name, dataEntry, attach.m_items.size() + 1));
@@ -72,6 +75,7 @@ public class AttachmentOpenKM implements IAttachmentStore {
 		return true;
 	}
 
+	//Using this method data will be stored in OpenKM
 	@Override
 	public boolean save(MAttachment attach, MStorageProvider prov) {
 
@@ -115,6 +119,7 @@ public class AttachmentOpenKM implements IAttachmentStore {
 		return false;
 	}
 
+	//Using this method attachment will be deleted from OpenKM
 	@Override
 	public boolean delete(MAttachment attach, MStorageProvider prov) {
 		try {
@@ -143,6 +148,7 @@ public class AttachmentOpenKM implements IAttachmentStore {
 		return true;
 	}
 
+	//Using this method attachment entry will be deleted from OpenKM
 	@Override
 	public boolean deleteEntry(MAttachment attach, MStorageProvider prov, int index) {
 		try {

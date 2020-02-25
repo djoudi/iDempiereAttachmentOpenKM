@@ -1,8 +1,7 @@
 # README #
 
 Pre-requisiites :
-- Java (Jdk)
-- iDempiere environment.
+- iDempiere 7.1
 
 OpenKM Plugin :
 
