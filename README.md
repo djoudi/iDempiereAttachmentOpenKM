@@ -1,5 +1,9 @@
 # README #
 
+Pre-requisiites :
+- Java (Jdk)
+- iDempiere environment.
+
 OpenKM Plugin :
 
 Follow below steps to setup OpenKM Plugin :
