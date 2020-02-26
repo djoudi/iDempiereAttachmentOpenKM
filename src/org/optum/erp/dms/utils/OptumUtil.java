@@ -27,13 +27,31 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-//Main Entry point for OpenKM API calling
+/**
+ * The Class OptumUtil.
+ */
 public class OptumUtil {
+	
+	/**
+	 * Load data.
+	 *
+	 * @return true, if successful
+	 */
 	public boolean loadData() {
 		return false;
 	} 
 	
-	// Using this method data will be save to OpenKM
+	/**
+	 * Save data to open KM.
+	 *
+	 * @param data the data
+	 * @param fileName the file name
+	 * @param url the url
+	 * @param path the path
+	 * @param encoding the encoding
+	 * @return the string
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	public String saveDataToOpenKM(byte[] data, String fileName, String url, String path, String encoding)
 			throws IOException {
 		
@@ -68,6 +86,17 @@ public class OptumUtil {
 		return existingUUID;
 	}
 
+	/**
+	 * Check in.
+	 *
+	 * @param data the data
+	 * @param fileName the file name
+	 * @param url the url
+	 * @param path the path
+	 * @param encoding the encoding
+	 * @param uuid the uuid
+	 * @throws IOException Signals that an I/O exception has occurred.
+	 */
 	private void checkIn(byte[] data, String fileName, String url, String path, String encoding, String uuid) throws IOException{
 		url = url + "/services/rest/document/checkin";
 		
@@ -85,6 +114,15 @@ public class OptumUtil {
 		Response response = client.newCall(request).execute();
 	}
 
+	/**
+	 * Check out.
+	 *
+	 * @param existingUUID the existing UUID
+	 * @param url the url
+	 * @param fileName the file name
+	 * @param encoding the encoding
+	 * @return the int
+	 */
 	private int checkOut(String existingUUID, String url, String fileName, String encoding) {
 		int statusCode = 0;
 		try {
@@ -102,6 +140,15 @@ public class OptumUtil {
 		return statusCode;
 	}
 
+	/**
+	 * Gets the existing UUID.
+	 *
+	 * @param fileName the file name
+	 * @param url the url
+	 * @param path the path
+	 * @param encoding the encoding
+	 * @return the existing UUID
+	 */
 	private String getExistingUUID(String fileName, String url, String path, String encoding) {
 		
 		URL obj;
@@ -142,6 +189,14 @@ public class OptumUtil {
 	
 	}
 
+	/**
+	 * Gets the dmsuuid.
+	 *
+	 * @param data the data
+	 * @param config the config
+	 * @param dataTitle the data title
+	 * @return the dmsuuid
+	 */
 	public byte[] getDMSUUID(byte[] data, DMSConfig config, String dataTitle) {
 		String uuid = null;
 		try {
@@ -153,7 +208,14 @@ public class OptumUtil {
 		return uuid.getBytes();
 	}
 
-	//Getting OpenKM configuration from iDempiere
+	/**
+	 * Gets the DMS config.
+	 *
+	 * @param prov the prov
+	 * @param tableId the table id
+	 * @param recordId the record id
+	 * @return the DMS config
+	 */
 	public static DMSConfig getDMSConfig(MStorageProvider prov, int tableId, int recordId) {
 		DMSConfig config = new DMSConfig();
 		String auth = prov.getUserName() + ":" + prov.getPassword();
@@ -169,15 +231,34 @@ public class OptumUtil {
 		return config;
 	}
 	
+	/**
+	 * Gets the table name.
+	 *
+	 * @param tableId the table id
+	 * @return the table name
+	 */
 	public static String getTableName(int tableId) {
 		return new MTable(Env.getCtx(), tableId, null).getTableName().toUpperCase();
 	}
 	
 	
+	/**
+	 * Gets the client name.
+	 *
+	 * @param clientId the client id
+	 * @return the client name
+	 */
 	public static String getClientName(int clientId) {
 		return new MClient(Env.getCtx(), clientId, null).getName();
 	}
 	
+	/**
+	 * Gets the document.
+	 *
+	 * @param uuid the uuid
+	 * @param config the config
+	 * @return the document
+	 */
 	public static byte[] getDocument(String uuid, DMSConfig config) {
 		byte[] dataEntry = null;
 		
@@ -212,6 +293,13 @@ public class OptumUtil {
 		return dataEntry;
 	}
 	
+	/**
+	 * Checks if is docs delete by UUID.
+	 *
+	 * @param uuid the uuid
+	 * @param config the config
+	 * @return true, if is docs delete by UUID
+	 */
 	public static boolean isDocsDeleteByUUID(String uuid, DMSConfig config) {
 		boolean status = Boolean.TRUE;
 		String url = config.getUrl() + "/services/rest/document/delete?docId="+uuid;
@@ -231,6 +319,11 @@ public class OptumUtil {
 		return status;
 	}
 	
+	/**
+	 * Gets the client path.
+	 *
+	 * @return the client path
+	 */
 	public static String getClientPath() { 
 		return "/" + getClientName(Env.getAD_Client_ID(Env.getCtx()));
 	}
